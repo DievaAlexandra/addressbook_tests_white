@@ -17,7 +17,7 @@ namespace addressbook_tests_white
     {
         public static string GROUPWINTITLE = "Group editor";
         public GroupHelper(ApplicationManager manager) : base(manager) { }
-
+        //комментарий который не нужен
 
 
 
