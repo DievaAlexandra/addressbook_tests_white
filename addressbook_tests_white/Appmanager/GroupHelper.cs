@@ -55,7 +55,7 @@ namespace addressbook_tests_white
         public GroupHelper Remove(GroupData group)
         {
             OpenGroupsDialog(); //открытие окна групп
-          //  SelectGroup(group.Id);//выбор группы
+            SelectGroup(group.Id);//выбор группы
             RemoveGroup();//выбор действия удаления
             ConfirmDeleteGroup();//подтверждение действия Удалить
             return this;
@@ -84,11 +84,11 @@ namespace addressbook_tests_white
         }
       
         //выбор группы из списка
-        //public GroupHelper SelectGroup(String id)
-       // {
-         //   string groupData = GetGroupList()[id];
-        //    return this;
-      //  }
+       public GroupData SelectGroup(string id)
+        {
+         GroupData groupData = GetGroupList()[1];
+         return groupData;
+        }
 
         //закрытие диалогового окна групп
         private void CloseGroupsDialog(Window dialog)

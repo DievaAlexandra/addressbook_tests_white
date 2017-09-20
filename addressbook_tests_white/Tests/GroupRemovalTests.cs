@@ -15,7 +15,7 @@ namespace addressbook_tests_white
 
             int groupcount = app.Groups.GetGroupList().Count;
 
-            if (groupcount == 0) //условие, если список групп пустой, то создать группу
+            if (groupcount <= 1) //условие, если кол-во групп меньше или равно 1, то создать группу
             {
                 app.Groups.Add(newGroup);
             }
