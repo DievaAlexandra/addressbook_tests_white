@@ -16,11 +16,10 @@ namespace addressbook_tests_white
     public class GroupHelper : HelperBase
     {
         public static string GROUPWINTITLE = "Group editor";
+        public static string GROUPDELETETITLE = "Delete group";
         public GroupHelper(ApplicationManager manager) : base(manager) { }
-        //комментарий который не нужен
 
-
-
+       
         //получение списка групп
         public List<GroupData> GetGroupList()
         {
@@ -40,14 +39,7 @@ namespace addressbook_tests_white
             return list;
         }
 
-        //открытие диалогового окна групп
-        private Window OpenGroupsDialog()
-        {
-            manager.MAinWindow.Get<Button>("groupButton").Click();
-            return manager.MAinWindow.ModalWindow(GROUPWINTITLE);
-        }
-
-        //создание группы
+       //создание группы
         public void Add(GroupData newGroup)
         {
             Window dialog = OpenGroupsDialog();
@@ -59,10 +51,53 @@ namespace addressbook_tests_white
 
         }
 
+        //удаление группы
+        public GroupHelper Remove(GroupData group)
+        {
+            OpenGroupsDialog(); //открытие окна групп
+          //  SelectGroup(group.Id);//выбор группы
+            RemoveGroup();//выбор действия удаления
+            ConfirmDeleteGroup();//подтверждение действия Удалить
+            return this;
+        }
+
+        //открытие диалогового окна групп
+        private Window OpenGroupsDialog()
+        {
+            manager.MAinWindow.Get<Button>("groupButton").Click();
+            return manager.MAinWindow.ModalWindow(GROUPWINTITLE);
+        }
+        
+        //выбор действия Удалить
+        public GroupHelper RemoveGroup()
+        {
+
+            manager.MAinWindow.Get<Button>("uxDeleteAddressButton").Click();//выбор действия Удалить
+            manager.MAinWindow.Get<RadioButton>("uxDeleteAllRadioButton").Click(); 
+            return this;
+        }
+
+        //подтверждение удаления группы
+        private void ConfirmDeleteGroup()
+        {
+            manager.MAinWindow.Get<Button>("uxOKAddressButton").Click(); //клик на "Ок" в диалоговом окне "delete group"
+        }
+      
+        //выбор группы из списка
+        //public GroupHelper SelectGroup(String id)
+       // {
+         //   string groupData = GetGroupList()[id];
+        //    return this;
+      //  }
+
         //закрытие диалогового окна групп
         private void CloseGroupsDialog(Window dialog)
         {
             dialog.Get<Button>("uxCloseAddressButton").Click();
         }
+
+      
     }
+
+   
 }

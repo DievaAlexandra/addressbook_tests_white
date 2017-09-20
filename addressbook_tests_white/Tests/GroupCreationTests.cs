@@ -11,9 +11,9 @@ namespace addressbook_tests_white
         [Test]
         public void TestGroupCreation()
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList(); 
 
-            GroupData newGroup = new GroupData()
+            GroupData newGroup = new GroupData() 
             {
                 Name = "white"
             };

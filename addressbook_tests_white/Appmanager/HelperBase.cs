@@ -10,7 +10,8 @@ namespace addressbook_tests_white
     public class HelperBase
     {
         protected ApplicationManager manager;
-       // protected string WINTITLE;
+        protected string WINTITLE;
+
 
         public HelperBase(ApplicationManager manager)
         {
