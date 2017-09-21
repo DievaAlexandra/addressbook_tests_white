@@ -16,7 +16,7 @@ namespace addressbook_tests_white
     public class GroupHelper : HelperBase
     {
         public static string GROUPWINTITLE = "Group editor";
-        public static string GROUPDELETETITLE = "Delete group";
+      
         public GroupHelper(ApplicationManager manager) : base(manager) { }
 
        
@@ -35,7 +35,7 @@ namespace addressbook_tests_white
                 });
             }
           
-            CloseGroupsDialog(dialog);
+           CloseGroupsDialog(dialog);
             return list;
         }
 
@@ -52,10 +52,10 @@ namespace addressbook_tests_white
         }
 
         //удаление группы
-        public GroupHelper Remove(GroupData group)
+        public GroupHelper Remove(int i)
         {
             OpenGroupsDialog(); //открытие окна групп
-            SelectGroup(group.Id);//выбор группы
+            SelectGroup(i);//выбор группы
             RemoveGroup();//выбор действия удаления
             ConfirmDeleteGroup();//подтверждение действия Удалить
             return this;
@@ -64,7 +64,11 @@ namespace addressbook_tests_white
         //открытие диалогового окна групп
         private Window OpenGroupsDialog()
         {
-            manager.MAinWindow.Get<Button>("groupButton").Click();
+            Button groupbutton = manager.MAinWindow.Get<Button>("groupButton");
+            if (groupbutton.Enabled)
+            {
+                groupbutton.Click();
+            }
             return manager.MAinWindow.ModalWindow(GROUPWINTITLE);
         }
         
@@ -84,10 +88,13 @@ namespace addressbook_tests_white
         }
       
         //выбор группы из списка
-       public GroupData SelectGroup(string id)
-        {
-         GroupData groupData = GetGroupList()[1];
-         return groupData;
+       private void SelectGroup(int index)
+       {
+           Window dialog = manager.MAinWindow.ModalWindow(GROUPWINTITLE);
+           Tree tree = dialog.Get<Tree>("uxAddressTreeView");
+           TreeNode root = tree.Nodes[0];
+           root.Nodes[index].Click();
+          
         }
 
         //закрытие диалогового окна групп

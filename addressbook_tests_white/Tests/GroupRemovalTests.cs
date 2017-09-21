@@ -22,9 +22,7 @@ namespace addressbook_tests_white
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();//получили старый список групп
 
-            GroupData toBeRemoved = oldGroups[0];
-
-            app.Groups.Remove(toBeRemoved);
+            app.Groups.Remove(0);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();//получили новый список групп
 
